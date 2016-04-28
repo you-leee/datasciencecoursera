@@ -1,6 +1,6 @@
 #How many properties are worth $1,000,000 or more?
 #install.packages("data.table")
-#library(data.table)
+library(data.table)
 fileName = "housing.csv"
 download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv", fileName)
 housing <- read.csv(fileName)
@@ -10,14 +10,14 @@ nrow(housing.complete[housing.complete$VAL == 24,])
 #What is the value of: sum(dat$Zip*dat$Ext,na.rm=T) 
 #install.packages("xlsx")
 #library(xlsx)
-fileName = "gas2.xlsx"
+fileName = "gas.xlsx"
 download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx", fileName)
 dat <- read.xlsx(fileName, 1, TRUE, colIndex = 7:15, rowIndex = 18:23)
 sum(dat$Zip*dat$Ext,na.rm=T) 
 
 #How many restaurants have zipcode 21231?
 #install.packages("XML")
-#library(XML)
+library(XML)
 fileName = "restaurants.xml"
 download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml", fileName)
 rest <- xmlParse(fileName, useInternalNodes = TRUE)
@@ -33,7 +33,7 @@ DT <- fread(fileName)
 system.time(rowMeans(DT)[DT$SEX==1])
 system.time(rowMeans(DT)[DT$SEX==2])
 
-system.time(mean(DT[DT$SEX==1,]$pwgtp15)) #0.04    0.00    0.04 
+system.time(mean(DT[DT$SEX==1,]$pwgtp15)) #0.03    0.00    0.03 
 system.time(mean(DT[DT$SEX==2,]$pwgtp15)) #0.04    0.00    0.03
     
 system.time(mean(DT$pwgtp15,by=DT$SEX))
